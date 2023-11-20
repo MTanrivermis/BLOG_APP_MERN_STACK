@@ -69,7 +69,6 @@ const UserSchema = new Schema({
         type: Boolean,
         default: false
     },
-​
 },{ collection: 'users', timestamps: true })
 /* ------------------------------------------------------- */
 // Schema Configs:
@@ -87,6 +86,14 @@ UserSchema.pre('save', function(next){
 
         next()
     }
+})
+
+
+// FOR FRONTEND DEVELOPER: // 
+UserSchema.pre('init', function (data) {
+
+    data.id = data._id
+    
 })
 
 
