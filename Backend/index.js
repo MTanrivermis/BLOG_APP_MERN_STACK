@@ -33,6 +33,9 @@ app.all('/',(req,res)=> {
 // Accept JSON:
 app.use(express.json())
 
+// GetModelList
+app.use(require('./src/middlewares/findSearchSortPage'))
+
 /* ------------------------------------------------------------------------- */
 // ROUTES:
 app.use(require('./src/routes'))

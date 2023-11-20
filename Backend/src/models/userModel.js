@@ -58,12 +58,10 @@ const UserSchema = new Schema({
     image: {
         type: String,
         trim: true,
-        required: false
     },
     bio: {
         type: String,
         trim: true,
-        required: false
     },
     isAdmin: {
         type: Boolean,
@@ -88,7 +86,7 @@ UserSchema.pre('save', function(next){
     }
 })
 
-
+/* ------------------------------------------------------- */
 // FOR FRONTEND DEVELOPER: // 
 UserSchema.pre('init', function (data) {
 
