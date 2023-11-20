@@ -76,7 +76,7 @@ const UserSchema = new Schema({
 UserSchema.pre('save', function(next){
 
     if(this.password){
-        const isPasswordValidated = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&+.,])[A-Za-z\d@$!%*?&+.,].{8,}$/.test(data.password)
+        const isPasswordValidated = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&+.,])[A-Za-z\d@$!%*?&+.,].{8,}$/.test(this.password)
 
         if(isPasswordValidated){
             this.password = passwordEncrypt(this.password)
