@@ -43,8 +43,7 @@ const UserSchema = new Schema({
     password: {
         type: String,
         trim: true,
-        required: true,
-        set: (password) => passwordEncrypt(password)
+        required: true
     },
     first_name: {
         type: String,
@@ -74,4 +73,23 @@ const UserSchema = new Schema({
 },{ collection: 'users', timestamps: true })
 /* ------------------------------------------------------- */
 // Schema Configs:
+
+UserSchema.pre('save', function(next){
+
+    if(this.password){
+        const isPasswordValidated = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&+.,])[A-Za-z\d@$!%*?&+.,].{8,}$/.test(data.password)
+
+        if(isPasswordValidated){
+            this.password = passwordEncrypt(this.password)
+        }else{
+            next(new Error("Password not validated."))
+        }
+
+        next()
+    }
+})
+
+
+/* ------------------------------------------------------- */
 module.exports = model('User', UserSchema)
+
