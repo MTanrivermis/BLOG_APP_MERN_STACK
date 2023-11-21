@@ -4,13 +4,13 @@
 ------------------------------------------------------- */
 // app.use(findSearchSortPage):
 
-module.exports = (req, res, next) => {  
-// Searching & Sorting & Pagination:  
+module.exports = (req, res, next) => {
+    // Searching & Sorting & Pagination:  
 
     // SEARCHING: URL?search[key1]=value1&search[key2]=value2
     let search = req.query?.search || {}
     for (let key in search) search[key] = { $regex: search[key], $options: 'i' }
-    
+
     const sort = req.query?.sort || {}
 
     // PAGINATION: URL?page=1&limit=10
@@ -30,7 +30,7 @@ module.exports = (req, res, next) => {
     // Run SearchingSortingPagination engine for Model:
     res.getModelList = async function (Model, filters = {}, populate = null) {
 
-        const filtersAndSearch = { ...filters, ...search  }
+        const filtersAndSearch = { ...filters, ...search }
 
         // return await Model.find(filtersAndSearch).sort(sort).skip(skip).limit(limit).populate(populate)
         // FOR REACT PROJECT:
@@ -42,7 +42,8 @@ module.exports = (req, res, next) => {
 
         const filtersAndSearch = { ...filters, ...search }
 
-        const dataCount = await Model.count(filtersAndSearch)
+        const dataCount = await Model.countDocuments(filtersAndSearch)
+        // const dataCount = await Model.find(filtersAndSearch).count()
 
         let details = {
             search,

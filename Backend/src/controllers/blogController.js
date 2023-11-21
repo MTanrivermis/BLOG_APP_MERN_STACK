@@ -3,18 +3,20 @@
     NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 // Blog Controller:
-const Blog = require('../models/blogMOdel')
+const Blog = require('../models/blogModel')
 module.exports = {
     list: async (req, res) => {
 
         const data = await res.getModelList(Blog)
         res.status(200).send({
             error: false,
-            // details: await res.getModelListDetails(Blog),
+            details: await res.getModelListDetails(Blog),
             data
         })
     },
     create: async (req, res) => {
+
+        req.body.author = req.user.username
 
         const data = await Blog.create(req.body)
         res.status(201).send({
@@ -23,6 +25,9 @@ module.exports = {
         })
     },
     read: async (req, res) => {
+
+
+
 
         const data = await Blog.findOne({ _id: req.params.id })
         res.status(200).send({
@@ -40,7 +45,7 @@ module.exports = {
         })
     },
     delete: async (req, res) => {
-  
+
         const data = await Blog.deleteOne({ _id: req.params.id })
         res.status(data.deletedCount ? 204 : 404).send({
             error: !data.deletedCount,
