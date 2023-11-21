@@ -1,4 +1,4 @@
-
+"use strict"
 const Token = require('../models/token')
 
 module.exports = async (req,res,next) => {

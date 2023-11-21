@@ -16,8 +16,22 @@ module.exports = {
       data,
     });
   },
-  
+
   create: async (req, res) => {
+
+/* 
+  const user = await User.create(req.body);
+    
+    const id = user._id
+    
+    // register
+     const tokenData = await Token.create({user_id: user._id,token: passwordEncrypt(user._id + Date.now())});
+
+    const {token} = tokenData
+
+    // spread operator used
+    res.status(201).send({...user._doc,token, id });
+*/
 
     const user = await User.create(req.body);
 
@@ -27,14 +41,11 @@ module.exports = {
     // register
     const tokenData = await Token.create({user_id: _id,token: passwordEncrypt(_id + Date.now()),});
 
-    userInfo.id = user._id
+    userInfo.id = _id
     userInfo.token = tokenData.token
-
-    console.log(userInfo);
 
     res.status(201).send(userInfo);
   },
-
   read: async (req, res) => {
     const data = await User.findOne({ _id: req.params.id });
     res.status(200).send({
@@ -42,7 +53,6 @@ module.exports = {
       data,
     });
   },
-
   update: async (req, res) => {
     const data = await User.updateOne({ _id: req.params.id }, req.body);
     res.status(202).send({
@@ -51,7 +61,6 @@ module.exports = {
       new: await User.findOne({ _id: req.params.id }),
     });
   },
-  
   delete: async (req, res) => {
     const data = await User.delete({ _id: req.params.id });
     res.status(data.deletedCount ? 204 : 404).send({
