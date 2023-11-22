@@ -5,7 +5,7 @@
 const router = require("express").Router();
 /* ------------------------------------------------------- */
 // routes/users:
-const user = require("../controllers/userController");
+const user = require("../controllers/user");
 const auth = require("../controllers/auth");
 
 // user routes

@@ -1,26 +1,24 @@
 "use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS | BLOG_APP Category Model
+    NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 const { Schema, model } = require('mongoose')
 /* ------------------------------------------------------- *
 {
-    "user_id": "65343222b67e9681f937f001",
-    "token": "...tokenKey..."
+  "name": "AI"
 }
 /* ------------------------------------------------------- */
-// Category Model:
+// Token Model:
 
 const CategorySchema = new Schema({
 
     name: {
         type: String,
         trim: true,
-        required: true,
+        required: true
     }, 
 
 }, { collection: 'categories', timestamps: true })
 
-/* ------------------------------------------------------- */
 /* ------------------------------------------------------- */
 module.exports = model('Category', CategorySchema)

@@ -1,6 +1,6 @@
 "use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS | BLOG_APP 
+    NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 // passwordEncrypt(password:string):
 
@@ -11,5 +11,5 @@ const { pbkdf2Sync } = require('crypto'),
     encType = 'sha512';
 
 module.exports = function (password) {
-    return pbkdf2Sync(password, keyCode, loopCount, charCount, encType).toString('hex') // hex decimal done.
+    return pbkdf2Sync(password, keyCode, loopCount, charCount, encType).toString('hex')
 }

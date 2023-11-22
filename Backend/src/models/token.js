@@ -1,12 +1,12 @@
 "use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS | BLOG_APP Token Model
+    NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 const { Schema, model } = require('mongoose')
 /* ------------------------------------------------------- *
 {
-    "user_id": "65343222b67e9681f937f001",
-    "token": "...tokenKey..."
+  "user_id": "65343222b67e9681f937f001",
+  "token": "...tokenKey..."
 }
 /* ------------------------------------------------------- */
 // Token Model:

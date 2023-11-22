@@ -1,29 +1,28 @@
 "use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS | BLOG_APP View Model
+    NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 const { Schema, model } = require('mongoose')
 /* ------------------------------------------------------- *
-
+{
+  "name": "AI"
+}
 /* ------------------------------------------------------- */
-// View Model:
+// Token Model:
 
 const ViewSchema = new Schema({
 
-    user_id: {
+    post_id: {
         type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true,
-        index: true,
-    },
-
-    viewedBy: {
+        ref:'Blog',
+        required: true
+    }, 
+    viewedBy:{
         type: Array,
         default: [],
     }
 
 }, { collection: 'views', timestamps: true })
-
 
 /* ------------------------------------------------------- */
 module.exports = model('View', ViewSchema)

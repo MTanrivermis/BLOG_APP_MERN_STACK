@@ -3,8 +3,8 @@
     NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 // Comment Controller:
-const Comment = require("../models/commentModel");
-const Blog = require("../models/blogModel");
+const Comment = require("../models/comment");
+const Blog = require("../models/blog");
 
 module.exports = {
   create: async (req, res) => {

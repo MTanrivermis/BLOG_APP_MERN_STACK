@@ -1,9 +1,10 @@
 const router = require("express").Router();
-//users
-router.use("/users", require("./userRoute"));
 
-//categories
-router.use("/api", require("./blogComLikeCat"));
+//users
+router.use("/users", require("./user"));
+
+// categories
+router.use("/api", require('./blogComLikCat'))
 
 
 

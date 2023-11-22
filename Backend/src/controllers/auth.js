@@ -1,4 +1,4 @@
-const User = require("../models/userModel");
+const User = require("../models/user");
 const Token = require("../models/token");
 
 const passwordEncrypt = require("../helpers/passwordEncrypt");
@@ -23,7 +23,7 @@ module.exports = {
     }
 
     let tokenData = await Token.findOne({ user_id: user._id });
-  
+   
     if(!tokenData) tokenData = await Token.create({user_id:user._id, token: passwordEncrypt( user._id + Date.now()) })
 
 
@@ -36,7 +36,6 @@ module.exports = {
 
   logout: async (req,res) => {
 
-    console.log(req.user);
     
     const auth = req?.headers?.authorization || null
 
@@ -46,14 +45,12 @@ module.exports = {
     if(token) await Token.deleteOne({token})
       
     
-
     res.send({
       error:false,
       message: 'User loged out'
     })
 
   }
-
 
 
 };

@@ -3,7 +3,6 @@
     USERS BLOG APP
 ------------------------------------------------------- */
 /* ------------------------------------------------------- *
-
 {
     "username": "admin",
     "password": "aA?123456",
@@ -14,13 +13,10 @@
     "bio":"",
     "isAdmin": true
 }
-
 /* ------------------------------------------------------- */
-
 const { Schema, model } = require('mongoose')
 const { isEmail } = require('validator') // for Validate process : npm i validator
 const passwordEncrypt = require('../helpers/passwordEncrypt')
-
 // User Model:
 const UserSchema = new Schema({
     username: {
@@ -30,7 +26,6 @@ const UserSchema = new Schema({
         unique: true,
         index: true
     },
-
     email: {
         type: String,
         trim: true,
@@ -66,10 +61,9 @@ const UserSchema = new Schema({
         type: Boolean,
         default: false
     },
-}, { collection: 'users', timestamps: true })
+},{ collection: 'users', timestamps: true })
 /* ------------------------------------------------------- */
 // Schema Configs:
-
 UserSchema.pre(['save', 'updateOne'], function (next) {
 
     const data = this?._update || this
@@ -86,16 +80,8 @@ UserSchema.pre(['save', 'updateOne'], function (next) {
         next()
     }
 })
-
-/* ------------------------------------------------------- */
-// FOR FRONTEND DEVELOPER: // 
 UserSchema.pre('init', function (data) {
-
     data.id = data._id
-
 })
-
-
 /* ------------------------------------------------------- */
 module.exports = model('User', UserSchema)
-
