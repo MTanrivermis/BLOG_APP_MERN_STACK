@@ -34,19 +34,17 @@ module.exports = {
 
     const user = await User.create(req.body);
 
-    // rest operoter
-    const { _id, ...userInfo } = user._doc;
-
     // register
     const tokenData = await Token.create({
-      user_id: _id,
-      token: passwordEncrypt(_id + Date.now()),
+      user_id: user._id,
+      token: passwordEncrypt(user._id + Date.now()),
     });
 
-    userInfo.id = _id;
-    userInfo.token = tokenData.token;
-
-    res.status(201).send(userInfo);
+   
+    user.token = tokenData.token;
+    user.id = user._id
+    console.log(user);
+    res.status(201).send(user);
   },
   read: async (req, res) => {
     const data = await User.findOne({ _id: req.params.id });
@@ -56,7 +54,7 @@ module.exports = {
     });
   },
   update: async (req, res) => {
-    const data = await User.updateOne({ _id: req.params.id }, req.bodya, {
+    const data = await User.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
     });
     res.status(202).send({

@@ -43,8 +43,11 @@ const useAuthCall = () => {
  const register = async (userData) => {
   dispatch(fetchStart())
     try {
+      
       const {data} = await axios.post(`${import.meta.env.VITE_BASE_URL}users/register/`, userData);
       dispatch(registerSuccess(data))
+      console.log(data);
+
       dispatch(modal(false))
       toastSuccessNotify('Register Successfull !')
     } catch (error) {
