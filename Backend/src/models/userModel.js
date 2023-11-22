@@ -30,7 +30,7 @@ const UserSchema = new Schema({
         unique: true,
         index: true
     },
-    
+
     email: {
         type: String,
         trim: true,
@@ -66,18 +66,20 @@ const UserSchema = new Schema({
         type: Boolean,
         default: false
     },
-},{ collection: 'users', timestamps: true })
+}, { collection: 'users', timestamps: true })
 /* ------------------------------------------------------- */
 // Schema Configs:
 
-UserSchema.pre('save', function(next){
+UserSchema.pre(['save', 'updateOne'], function (next) {
 
-    if(this.password){
-        const isPasswordValidated = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&+.,])[A-Za-z\d@$!%*?&+.,].{8,}$/.test(this.password)
+    const data = this?._update || this
 
-        if(isPasswordValidated){
-            this.password = passwordEncrypt(this.password)
-        }else{
+    if (data?.password) {
+        const isPasswordValidated = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&+.,])[A-Za-z\d@$!%*?&+.,].{8,}$/.test(data?.password)
+
+        if (isPasswordValidated) {
+            this.password = data.password = passwordEncrypt(data.password)
+        } else {
             next(new Error("Password not validated."))
         }
 
@@ -90,7 +92,7 @@ UserSchema.pre('save', function(next){
 UserSchema.pre('init', function (data) {
 
     data.id = data._id
-    
+
 })
 
 
