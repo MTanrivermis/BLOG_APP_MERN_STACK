@@ -105,7 +105,7 @@ BlogSchema.pre(["save", "findOneAndUpdate"], async function (next) {
   const data = this._update || this;
 
   // category alanına bağlı kategori bilgisini al
-  const category = await Category.findOne({ _id: data.category });
+  const category = await Category.findOneAndUpdate({ _id: data.category });
 
   // category_name'i belirle
   this.category_name = data.category_name = category.name;
