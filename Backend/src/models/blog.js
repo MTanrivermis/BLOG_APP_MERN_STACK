@@ -108,7 +108,7 @@ BlogSchema.pre(["save", "findOneAndUpdate"], async function (next) {
   const category = await Category.findOne({ _id: data.category });
 
   // category_name'i belirle
-  this.category_name = category.name;
+  this.category_name = data.category_name = category.name;
 
   // updateOne için _update değil, findOneAndUpdate için _updateOne kullan
   if (this.op === "findOneAndUpdate") {
