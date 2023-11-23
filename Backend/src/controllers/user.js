@@ -18,34 +18,20 @@ module.exports = {
   },
 
   create: async (req, res) => {
-    /* 
-  const user = await User.create(req.body);
-    
-    const id = user._id
-    
-    // register
-     const tokenData = await Token.create({user_id: user._id,token: passwordEncrypt(user._id + Date.now())});
-
-    const {token} = tokenData
-
-    // spread operator used
-    res.status(201).send({...user._doc,token, id });
-*/
 
     const user = await User.create(req.body);
+    
 
     // register
-    const tokenData = await Token.create({
-      user_id: user._id,
-      token: passwordEncrypt(user._id + Date.now()),
-    });
+    const tokenData = await Token.create({user_id: user._id,token: passwordEncrypt(user._id + Date.now())});
 
-   
-    user.token = tokenData.token;
-    user.id = user._id
-    console.log(user);
+
+    user._doc.id = user._id;
+    user._doc.token = tokenData.token;
+
     res.status(201).send(user);
   },
+
   read: async (req, res) => {
     const data = await User.findOne({ _id: req.params.id });
     res.status(200).send({
