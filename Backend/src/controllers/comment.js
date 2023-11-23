@@ -49,7 +49,7 @@ module.exports = {
       const commentsOfBlog = await Comment.find({ post });
 
       await Blog.updateOne({ _id: post }, { comments: commentsOfBlog });
-    } else throw new Error("You can only delte your own comment!");
+    } else throw new Error("You can only delete your own comment!");
 
     res.status(data.deletedCount ? 204 : 404).send({
       error: !data.deletedCount,

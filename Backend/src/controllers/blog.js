@@ -22,9 +22,9 @@ module.exports = {
 
     const data = await res.getModelList(Blog, filters);
 
-    res.status(200).send( data);
+    res.status(200).send(data);
   },
-  
+
   create: async (req, res) => {
 
     req.body.author = req.user.username;
@@ -115,15 +115,15 @@ app.get('/blogs/:id', async (req, res) => {
 
     const author = blog?.author;
     let data;
-    
+
     if (req.user.username === blog?.author || req.user.isAdmin) {
       data = await Blog.deleteOne({ _id: req.params.id });
 
-      await Comment.deleteMany({post: req.params.id })
-      await Like.deleteMany({post_id: req.params.id })
-      await View.deleteMany({post_id: req.params.id })
+      await Comment.deleteMany({ post: req.params.id })
+      await Like.deleteMany({ post_id: req.params.id })
+      await View.deleteMany({ post_id: req.params.id })
 
-    } else throw new Error("You can only delte your own comment!");
+    } else throw new Error("You can only delete your own comment!");
 
     res.status(data.deletedCount ? 204 : 404).send({
       error: !data.deletedCount,
