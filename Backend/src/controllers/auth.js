@@ -23,8 +23,8 @@ module.exports = {
     }
 
     let tokenData = await Token.findOne({ user_id: user._id });
-
-    if (!tokenData) tokenData = await Token.create({ user_id: user._id, token: passwordEncrypt(user._id + Date.now()) })
+   
+    if(!tokenData) tokenData = await Token.create({user_id:user._id, token: passwordEncrypt( user._id + Date.now()) })
 
 
     res.send({
@@ -34,19 +34,19 @@ module.exports = {
   },
 
 
-  logout: async (req, res) => {
+  logout: async (req,res) => {
 
-
+    
     const auth = req?.headers?.authorization || null
 
-    const token = auth ? auth.split(' ')[1] : null
+    const  token = auth ? auth.split(' ')[1] : null
 
 
-    if (token) await Token.deleteOne({ token })
-
-
+    if(token) await Token.deleteOne({token})
+      
+    
     res.send({
-      error: false,
+      error:false,
       message: 'User loged out'
     })
 

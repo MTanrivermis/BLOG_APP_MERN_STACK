@@ -7,7 +7,7 @@ module.exports = {
     if (req?.user) next();
     else {
       res.errorStatusCode = 403;
-      throw new Error("No Permissons, You must login!");
+      throw new Error("No Permissoons, You must login!");
     }
   },
   isAdmin: (req, res, next) => {
@@ -17,7 +17,7 @@ module.exports = {
     if (req?.user?.isAdmin) next();
     else {
       res.errorStatusCode = 403;
-      throw new Error("No Permissons, You must login and to be Admin!");
+      throw new Error("No Permissoons, You must login and to be Admin!");
     }
   },
 };
