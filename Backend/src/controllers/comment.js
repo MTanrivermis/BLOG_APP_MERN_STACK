@@ -8,6 +8,12 @@ const Blog = require("../models/blog");
 
 module.exports = {
   create: async (req, res) => {
+
+    /*
+        #swagger.tags=['Comments']
+        
+        */
+
     req.body.user = req.user.username;
     req.body.post = req.params.id;
 
@@ -22,6 +28,12 @@ module.exports = {
     });
   },
   update: async (req, res) => {
+
+    /*
+          #swagger.tags=['Comments']
+          
+          */
+
     const comment = await Comment.findOne({ _id: req.params.id });
     const post = comment?.post;
 
@@ -39,6 +51,12 @@ module.exports = {
     });
   },
   delete: async (req, res) => {
+
+    /*
+        #swagger.tags=['Comments']
+        
+        */
+
     const comment = await Comment.findOne({ _id: req.params.id });
     const post = comment?.post;
     let data;

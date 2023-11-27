@@ -9,6 +9,12 @@ const passwordEncrypt = require("../helpers/passwordEncrypt");
 
 module.exports = {
   list: async (req, res) => {
+
+    /*
+    #swagger.tags=['Users']
+    
+     */
+
     const data = await res.getModelList(User);
     res.status(200).send({
       error: false,
@@ -19,11 +25,16 @@ module.exports = {
 
   create: async (req, res) => {
 
+    /*
+      #swagger.tags=['Users']
+      
+      */
+
     const user = await User.create(req.body);
-    
+
 
     // register
-    const tokenData = await Token.create({user_id: user._id,token: passwordEncrypt(user._id + Date.now())});
+    const tokenData = await Token.create({ user_id: user._id, token: passwordEncrypt(user._id + Date.now()) });
 
 
     user._doc.id = user._id;
@@ -33,6 +44,12 @@ module.exports = {
   },
 
   read: async (req, res) => {
+
+    /*
+      #swagger.tags=['Users']
+      
+      */
+
     const data = await User.findOne({ _id: req.params.id });
     res.status(200).send({
       error: false,
@@ -40,6 +57,12 @@ module.exports = {
     });
   },
   update: async (req, res) => {
+
+    /*
+      #swagger.tags=['Users']
+      
+      */
+
     const data = await User.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
     });
@@ -50,6 +73,12 @@ module.exports = {
     });
   },
   delete: async (req, res) => {
+
+    /*
+      #swagger.tags=['Users']
+      
+      */
+
     const data = await User.delete({ _id: req.params.id });
     res.status(data.deletedCount ? 204 : 404).send({
       error: !data.deletedCount,

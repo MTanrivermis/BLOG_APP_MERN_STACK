@@ -18,6 +18,12 @@ app.all("/", (req, res) => {
   res.send({
     error: false,
     message: "Welcome to Blog App server!!",
+    documents: {
+      swagger: "/documents/swagger",
+      redoc: "/documents/redoc",
+      json: "/documents/json",
+    },
+    user: req.user,
   });
 });
 /* ------------------------------------------------------------------------- */
@@ -26,6 +32,7 @@ app.use(express.json());
 app.use(require('cors')())
 app.use(require("./src/middlewares/findSearchSortPage"));
 app.use(require('./src/middlewares/authentication'))
+//app.use(require('./src/middlewares/logger'))
 
 /* ------------------------------------------------------------------------- */
 // ROUTES:
