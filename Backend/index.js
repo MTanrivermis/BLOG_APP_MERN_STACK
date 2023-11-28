@@ -26,6 +26,13 @@ app.all("/", (req, res) => {
     user: req.user,
   });
 });
+
+/* ------------------------------------------------------------------------- */
+//MAIL:
+// require('./src/helpers/sendMail')("abc@gmail.com", "Hello", "Hello There!")
+
+
+
 /* ------------------------------------------------------------------------- */
 // MIDDLEWARES:
 app.use(express.json());

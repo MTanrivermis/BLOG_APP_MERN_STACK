@@ -14,7 +14,7 @@ router.route("/")
 
 router.route("/register").post(user.create);
 
-
+router.get('/verify', user.verify)
 
 router
   .route("/:id")

@@ -61,10 +61,14 @@ const UserSchema = new Schema({
         type: Boolean,
         default: false
     },
-},{ collection: 'users', timestamps: true })
+    emailVerified: {
+        type: Boolean,
+        default: false
+    },
+}, { collection: 'users', timestamps: true })
 /* ------------------------------------------------------- */
 // Schema Configs:
-UserSchema.pre(['save', 'updateOne'], function (next) {
+UserSchema.pre(['save'], function (next) {
 
     const data = this?._update || this
 
