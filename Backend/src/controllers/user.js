@@ -47,7 +47,7 @@ module.exports = {
       'welcome',
       `
       <p>Welcome my blog app</p>
-      Verify Email: http://127.0.0.1:8000/users/verify/?id=${user._id}&verifyCode=${passwordEncrypt(user.email)}
+      Verify Email: https://blog-app-mern-stack-nine.vercel.app/users/verify/?id=${user._id}&verifyCode=${passwordEncrypt(user.email)}
       `
     )
 
