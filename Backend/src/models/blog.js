@@ -77,11 +77,13 @@ const BlogSchema = new Schema(
         return this.likes_n.length;
       },
     },
+    images: {
+      type: Array,
+      default: []
+    }
   },
   { collection: "blogs", timestamps: true }
 );
-
-
 
 
 

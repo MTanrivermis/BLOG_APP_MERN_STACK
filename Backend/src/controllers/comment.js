@@ -9,10 +9,17 @@ const Blog = require("../models/blog");
 module.exports = {
   create: async (req, res) => {
 
-    /*
-        #swagger.tags=['Comments']
-        
-        */
+    /* #swagger.tags=['Comments']
+       #swagger.summary = "Create Comment"
+            #swagger.description = "Look to <b>'Models/Comment'</b> for parameters."
+             #swagger.parameters['body'] = {
+                in: 'body',
+                required: 'true',
+                schema: {
+                    $ref: '#/definitions/Comment'
+                }
+            }
+       */
 
     req.body.user = req.user.username;
     req.body.post = req.params.id;
@@ -29,10 +36,15 @@ module.exports = {
   },
   update: async (req, res) => {
 
-    /*
-          #swagger.tags=['Comments']
-          
-          */
+    /* #swagger.tags=['Comments']
+       #swagger.summary = "Update Comment"
+            #swagger.parameters['body'] = {
+                in: 'body',
+                required: true,
+                schema: {
+                }
+            }
+       */
 
     const comment = await Comment.findOne({ _id: req.params.id });
     const post = comment?.post;
@@ -52,10 +64,9 @@ module.exports = {
   },
   delete: async (req, res) => {
 
-    /*
-        #swagger.tags=['Comments']
-        
-        */
+    /* #swagger.tags=['Comments']
+       #swagger.summary = "Delete Comment"
+       */
 
     const comment = await Comment.findOne({ _id: req.params.id });
     const post = comment?.post;
