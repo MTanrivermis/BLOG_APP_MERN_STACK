@@ -4,7 +4,7 @@
 ------------------------------------------------------- */
 const router = require("express").Router();
 /* ------------------------------------------------------- */
-const upload = require('../middlewares/upload')
+
 // routes/users:
 
 const category = require("../controllers/category")
@@ -37,13 +37,13 @@ router.route("/comments/:id")
 // blog  routes
 router.route("/blogs")
   .get(blog.list)
-  .post(permissons.isLogin, upload.array('images'), blog.create);
+  .post(permissons.isLogin, blog.create);
 
 router
   .route("/blogs/:id")
   .get(permissons.isLogin, blog.read)
-  .put(permissons.isLogin, upload.array('images'), blog.update)
-  .patch(permissons.isLogin, upload.array('images'), blog.update)
+  .put(permissons.isLogin, blog.update)
+  .patch(permissons.isLogin, blog.update)
   .delete(permissons.isLogin, blog.delete);
 
 // likes  routes
