@@ -5,7 +5,7 @@ import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 import { useNavigate } from "react-router-dom";
 
 const useAuthCall = () => {
-
+  
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
@@ -14,7 +14,7 @@ const useAuthCall = () => {
     dispatch(fetchStart());
 
     try {
-      const { data } = await axios.post(`${import.meta.env.VITE_BASE_URL}` + "users/auth/login/", userData);
+      const { data } = await axios.post(`${import.meta.env.VITE_BASE_URL}` + "users/auth/login/",userData);
       dispatch(loginSuccess(data));
       dispatch(modal(false))
       navigate(-1)
@@ -40,24 +40,25 @@ const useAuthCall = () => {
     }
   };
 
-  const register = async (userData) => {
-    dispatch(fetchStart())
+ const register = async (userData) => {
+  dispatch(fetchStart())
     try {
-      const { data } = await axios.post(`${import.meta.env.VITE_BASE_URL}users/register/`, userData);
+      
+      const {data} = await axios.post(`${import.meta.env.VITE_BASE_URL}users/register/`, userData);
       dispatch(registerSuccess(data))
       console.log(data);
+
       dispatch(modal(false))
       toastSuccessNotify('Register Successfull !')
-
     } catch (error) {
       dispatch(fetchFail())
-      toastErrorNotify((error?.request) ? error?.request?.response : error.message)
+      toastErrorNotify((error?.request ) ? error?.request?.response : error.message )
       console.log(error);
     }
   };
 
 
-  return { login, logout, register };
+  return { login , logout,register};
 };
 
 export default useAuthCall;

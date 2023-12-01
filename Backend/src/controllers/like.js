@@ -8,11 +8,10 @@ const Blog = require("../models/blog");
 
 module.exports = {
   create: async (req, res) => {
-
-    /* #swagger.tags=['Likes']
+      /* #swagger.tags=['Likes']
       #swagger.summary = "Create Blog"
             #swagger.description = "Look to <b>'Models/Like'</b> for parameters."
-            #swagger.parameters['body'] = {
+             #swagger.parameters['body'] = {
                 in: 'body',
                 required: 'true',
                 schema: {
@@ -20,26 +19,23 @@ module.exports = {
                 }
             }
        */
+      req.body.user_id = req.user._id;
+      req.body.post_id = req.params.id;
 
-    req.body.user_id = req.user._id;
-    req.body.post_id = req.params.id;
+      let likes = await Like.findOne({
+          user_id: req.user._id,
+          post_id: req.params.id,
+      });
 
+      if (likes) await Like.deleteOne({ _id: likes._id });
+      else await Like.create({ user_id: req.user._id, post_id: req.params.id });
 
-    let likes = await Like.findOne({
-      user_id: req.user._id,
-      post_id: req.params.id,
-    });
+      const likesOfpost = await Like.find({ post_id: req.params.id });
 
-    if (likes) await Like.deleteOne({ _id: likes._id });
-    else await Like.create({ user_id: req.user._id, post_id: req.params.id });
+      await Blog.updateOne({ _id: req.params.id }, { likes_n: likesOfpost });
 
-    const likesOfpost = await Like.find({ post_id: req.params.id });
-
-
-    await Blog.updateOne({ _id: req.params.id }, { likes_n: likesOfpost });
-
-    res.status(201).send({
-      error: false,
-    });
+      res.status(201).send({
+          error: false,
+      });
   },
 };

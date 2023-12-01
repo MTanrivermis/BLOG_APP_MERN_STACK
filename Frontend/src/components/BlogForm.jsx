@@ -16,14 +16,11 @@ const BlogForm = ({formValues , handleClose}) => {
    useEffect(() => {
      getCategories('categories')
    }, [])
-// eslint-disable-next-line react/prop-types
-const category_id = formValues?.category?._id
+  const category_id=formValues?.category?._id
+
   return (
     <Formik
-            initialValues={{
-              ...formValues,
-              category: category_id,
-            }}
+            initialValues={{...formValues,category:category_id}}
             onSubmit={(values, action) => {
 
                 if("_id" in formValues){
@@ -103,7 +100,7 @@ const category_id = formValues?.category?._id
                       onChange={handleChange}
                     />
 
-                    <Button variant='contained' color="primary" type="submit">
+                    <Button sx={{bgcolor:"black"}} variant='contained'  type="submit">
                       SAVE
                     </Button>
                   </Box>

@@ -45,12 +45,13 @@ export default function DetailBlog() {
 
     // isAuther
     const isAuthor = blogDetail?.author === userInfo?.username
+
     // check isLiked
     let isLiked = blogDetail?.likes_n?.some(like => like.user_id === userInfo?._id)
 
     return (
         <>
-            <Box sx={{ display: 'flex', p: 10, pb: 0, flexDirection: { xs: 'column', md: "row" } }} >
+            <Box   sx={{ display: 'flex', p: 10, pb: 0, flexDirection: { xs: 'column', md: "row" } }} >
                 <CardContent sx={{ display: 'flex', flexGrow: 1, justifyContent: "space-between", flexDirection: "column" }} >
                     <Box>
                         <CardHeader

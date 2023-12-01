@@ -4,7 +4,6 @@
 ------------------------------------------------------- */
 const router = require("express").Router();
 /* ------------------------------------------------------- */
-
 // routes/users:
 
 const category = require("../controllers/category")
@@ -41,16 +40,16 @@ router.route("/blogs")
 
 router
   .route("/blogs/:id")
-  .get(permissons.isLogin, blog.read)
-  .put(permissons.isLogin, blog.update)
-  .patch(permissons.isLogin, blog.update)
-  .delete(permissons.isLogin, blog.delete);
+  .get(permissons.isLogin,blog.read)
+  .put(permissons.isLogin,blog.update)
+  .patch(permissons.isLogin,blog.update)
+  .delete(permissons.isLogin,blog.delete);
 
 // likes  routes
 router.route("/likes/:id").post(permissons.isLogin, like.create)
-
-
-
+ 
+ 
+ 
 
 
 /* ------------------------------------------------------- */

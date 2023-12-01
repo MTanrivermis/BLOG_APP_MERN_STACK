@@ -1,70 +1,84 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 // node i nodemailer
 // sendMail(to:string, subject:string, message:string):
 
-
-const nodemailer = require('nodemailer')
-
-//nodemailer.createTestAccount().then((email) => console.log(email))
+const nodemailer = require("nodemailer");
 
 module.exports = function (to, subject, message) {
-    //Connection to mailServer:
+    // ?TEST ICIN
+    //     // Set Passive:
+    //     // return true
+    //     // Create Test (Fake) Account:
+    //     nodemailer.createTestAccount().then((email) => console.log(email)); //fake email hesabi acmak icin bir defa calisip hesabi aldiktan sonra kapatmalisin
+    //     /*
+    //     {
+    //   user: 'mfevpn3qqbefvkfs@ethereal.email',
+    //   pass: 'XPxhwNPgrYvu5HMfGc',
+    //   smtp: { host: 'smtp.ethereal.email', port: 587, secure: false },
+    //   imap: { host: 'imap.ethereal.email', port: 993, secure: true },
+    //   pop3: { host: 'pop3.ethereal.email', port: 995, secure: true },
+    //   web: 'https://ethereal.email'
+    // }
+    //     */
+    //     // Connection to mailServer:
+    //     const transporter = nodemailer.createTransport({
+    //         host: "smtp.ethereal.email",
+    //         port: 587,
+    //         auth: {
+    //             user: "mfevpn3qqbefvkfs@ethereal.email",
+    //             pass: "XPxhwNPgrYvu5HMfGc",
+    //         },
+    //     });
+    //     // SendMail:
+    //     transporter.sendMail(
+    //         {
+    //             from: "mfevpn3qqbefvkfs@ethereal.email",
+    //             to: "qadir@clarusway.com", // 'abc@mail.com, def@mail.com'
+    //             subject: "Hello",
+    //             text: "Hello There...",
+    //             html: "<b>Hello There</b>",
+    //         },
+    //         (error, successInfo) => {
+    //             error ? console.log(error) : console.log(successInfo);
+    //         }
+    //     );
 
-    // const transporter = nodemailer.createTransport({
-    //     host: 'smtp.ethereal.email',
-    //     port: '587',
-    //     secure: false, // false | 'tls' | 'ssl' // mail servisleri genelde ssl ayarlarını çok istemezler kendi içinde çözerler
-    //     auth: {
-    //         user: 'g7t5o53awcakxxdm@ethereal.email',
-    //         pass: 's6XZuGPZw3zf6yfTaQ'
-    //     }
-    // })
-
-    // // Send Mail:
-    // transporter.sendMail({
-    //     from: 'a6rt5fd7ub73r6za@ethereal.email',
-    //     to: 'm.tanrivermis88@gmail.com',
-    //     subject: 'Hello',  // konu 
-    //     text: 'Hello There!', // içerik
-    //     html: '<b> Hello World </b>' // textin alternatifi html.. text te yalın metin gönderilirken html de html etiteklerini kullanarak düzenlenen bir mail gönderebiliriz.
-    // }, (error, successInfo) => {
-    //     (error) ? console.log(error) : console.log(successInfo)
-    // })
-
-    /* -------------------------------------------------------------------------------------------*/
-
-
-    //? GOOGLE MAIL SERVISI
+    // ?GFOOGLE MAIL SERVICE
     // Google -> AccountHome -> Security -> Two-Step-Verify -> App-Passwords
     const mailSettings = {
-        service: 'Gmail',
-        user: 'tanrivermis.mehmet@gmail.com',
-        pass: 'tima kybt kdfb tfma'
-    }
-
+        service: "Gmail",
+        user: "kplnhsyn.49@gmail.com",
+        pass: "gqtr rxhq njxy vsgi",
+    };
+    //? YandexMail (yandex) icin :
+    // const mailSettings = {
+    //     service: "Yandex",
+    //     user: "username@yandex.com",
+    //     pass: "password", // your emailPassword
+    // };
     // Mail Content:
-    const mailContent = {
+    const emailContent = {
         from: mailSettings.user,
-        to: to,
-        subject: subject,
-        text: message,
-        html: message
-    }
+        to: to, // 'qadiradamson@gmail.com',
+        subject: subject, // 'Hello',
+        text: message, // 'Hello, How are you?',
+        html: message, // '<b>Hello</b> How are you?'
+    };
 
     // Connect to mailServer:
     const transporter = nodemailer.createTransport({
         service: mailSettings.service,
         auth: {
             user: mailSettings.user,
-            pass: mailSettings.pass
-        }
-    })
+            pass: mailSettings.pass,
+        },
+    });
 
     //Send Mail
-    transporter.sendMail(mailContent, (error, info) => {
-        error ? console.log(error) : console.log(info)
-    })
-}
+    transporter.sendMail(emailContent, (error, info) => {
+        error ? console.log(error) : console.log(info);
+    });
+};

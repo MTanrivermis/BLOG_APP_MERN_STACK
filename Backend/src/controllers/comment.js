@@ -8,8 +8,7 @@ const Blog = require("../models/blog");
 
 module.exports = {
   create: async (req, res) => {
-
-    /* #swagger.tags=['Comments']
+      /* #swagger.tags=['Comments']
        #swagger.summary = "Create Comment"
             #swagger.description = "Look to <b>'Models/Comment'</b> for parameters."
              #swagger.parameters['body'] = {
@@ -20,23 +19,24 @@ module.exports = {
                 }
             }
        */
+      req.body.user = req.user.username;
+      req.body.post = req.params.id;
 
-    req.body.user = req.user.username;
-    req.body.post = req.params.id;
+      await Comment.create(req.body);
 
-    await Comment.create(req.body);
+      const commentsOfBlog = await Comment.find({ post: req.params.id });
 
-    const commentsOfBlog = await Comment.find({ post: req.params.id });
+      await Blog.updateOne(
+          { _id: req.params.id },
+          { comments: commentsOfBlog }
+      );
 
-    await Blog.updateOne({ _id: req.params.id }, { comments: commentsOfBlog });
-
-    res.status(201).send({
-      error: false,
-    });
+      res.status(201).send({
+          error: false,
+      });
   },
   update: async (req, res) => {
-
-    /* #swagger.tags=['Comments']
+      /* #swagger.tags=['Comments']
        #swagger.summary = "Update Comment"
             #swagger.parameters['body'] = {
                 in: 'body',
@@ -45,43 +45,40 @@ module.exports = {
                 }
             }
        */
+      const comment = await Comment.findOne({ _id: req.params.id });
+      const post = comment?.post;
 
-    const comment = await Comment.findOne({ _id: req.params.id });
-    const post = comment?.post;
+      if (req.user.username === comment?.user) {
+          await Comment.updateOne({ _id: req.params.id }, req.body);
 
-    if (req.user.username === comment?.user) {
-      await Comment.updateOne({ _id: req.params.id }, req.body);
+          const commentsOfBlog = await Comment.find({ post });
 
-      const commentsOfBlog = await Comment.find({ post });
+          await Blog.updateOne({ _id: post }, { comments: commentsOfBlog });
+      } else throw new Error("You can only update your own comment!");
 
-      await Blog.updateOne({ _id: post }, { comments: commentsOfBlog });
-    } else throw new Error("You can only update your own comment!");
-
-    res.status(202).send({
-      error: false,
-      new: await Comment.findOne({ _id: req.params.id }),
-    });
+      res.status(202).send({
+          error: false,
+          new: await Comment.findOne({ _id: req.params.id }),
+      });
   },
   delete: async (req, res) => {
-
-    /* #swagger.tags=['Comments']
+      /* #swagger.tags=['Comments']
        #swagger.summary = "Delete Comment"
        */
+      const comment = await Comment.findOne({ _id: req.params.id });
+      const post = comment?.post;
+      let data;
 
-    const comment = await Comment.findOne({ _id: req.params.id });
-    const post = comment?.post;
-    let data;
+      if (req.user.username === comment?.user || req.user.isAdmin) {
+          data = await Comment.deleteOne({ _id: req.params.id });
 
-    if (req.user.username === comment?.user || req.user.isAdmin) {
-      data = await Comment.deleteOne({ _id: req.params.id });
+          const commentsOfBlog = await Comment.find({ post });
 
-      const commentsOfBlog = await Comment.find({ post });
+          await Blog.updateOne({ _id: post }, { comments: commentsOfBlog });
+      } else throw new Error("You can only delte your own comment!");
 
-      await Blog.updateOne({ _id: post }, { comments: commentsOfBlog });
-    } else throw new Error("You can only delte your own comment!");
-
-    res.status(data.deletedCount ? 204 : 404).send({
-      error: !data.deletedCount,
-    });
+      res.status(data.deletedCount ? 204 : 404).send({
+          error: !data.deletedCount,
+      });
   },
 };
