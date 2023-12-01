@@ -156,7 +156,7 @@ const Footer = () => {
                 }}
             >
                 <Link
-                    href="https://github.com/kaplanh"
+                    href="https://github.com/MTanrivermis"
                     underline="hover"
                     target="_blank"
                     rel="noopener"
@@ -169,7 +169,7 @@ const Footer = () => {
                     <GitHubIcon sx={iconStyle} />
                 </Link>
                 <Link
-                    href="https://www.linkedin.com/in/kaplan-h/"
+                    href="https://www.linkedin.com/in/mtanrivermis/"
                     underline="hover"
                     color="initial"
                     target="_blank"
@@ -180,7 +180,7 @@ const Footer = () => {
                     <LinkedInIcon sx={iconStyle} />
                 </Link>
                 <Link
-                    href="mailto:kplnhsyn.49@gmail.com/"
+                    href="mailto:tanrivermis.mehmet@gmail.com/"
                     underline="hover"
                     color="initial"
                     target="_blank"
