@@ -3,10 +3,10 @@ import { Box, Link, Typography } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import MarkEmailReadIcon from "@mui/icons-material/MarkEmailRead";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { iconStyle } from "../styles/globalStyles";
-import { useSelector } from "react-redux";
+
 
 const Footer = () => {
     const [weather, setWeather] = useState();
@@ -48,9 +48,8 @@ const Footer = () => {
                 console.log(latitude, longitude);
                 let lat = Number(latitude.toFixed());
                 let lon = Number(longitude.toFixed());
-                const URL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${
-                    import.meta.env.VITE_WEATHER_API_KEY
-                }&units=metric&lang=de`;
+                const URL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${import.meta.env.VITE_WEATHER_API_KEY
+                    }&units=metric&lang=de`;
 
                 fetch(URL)
                     .then((res) => res.json())
@@ -163,9 +162,9 @@ const Footer = () => {
                     rel="noopener"
                     color="initial"
                     sx={{ "&:hover": { color: "red", bg: "primary" } }}
-                    //*üçüncü taraf içeriğine bağlantı verirken her zaman rel="noopener" veya rel="noreferrer" ayarının yapılması önerilir.
-                    // *rel="noopener", yeni sayfanın window.opener özelliğine erişmesini engeller ve ayrı bir işlemde çalışmasını sağlar. Bu olmadan, hedef sayfa potansiyel olarak sayfanızı kötü niyetli bir URL'ye yönlendirebilir.
-                    //* rel="noreferrer" has the same effect, but also prevents the Referer header from being sent to the new page. ⚠️ Removing the referrer header will affect analytics.
+                //*üçüncü taraf içeriğine bağlantı verirken her zaman rel="noopener" veya rel="noreferrer" ayarının yapılması önerilir.
+                // *rel="noopener", yeni sayfanın window.opener özelliğine erişmesini engeller ve ayrı bir işlemde çalışmasını sağlar. Bu olmadan, hedef sayfa potansiyel olarak sayfanızı kötü niyetli bir URL'ye yönlendirebilir.
+                //* rel="noreferrer" has the same effect, but also prevents the Referer header from being sent to the new page. ⚠️ Removing the referrer header will affect analytics.
                 >
                     <GitHubIcon sx={iconStyle} />
                 </Link>
