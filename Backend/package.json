@@ -1,4 +1,5 @@
 {
+  "title": "Blog API",
   "name": "backend",
   "version": "1.0.0",
   "description": "This is backend of Blog_App",
@@ -8,7 +9,7 @@
     "test": "DEBUG=* nodemon"
   },
   "keywords": [],
-  "author": "Mehmet Tanrıvermiş",
+  "author": "Mehmet Tanrivermis",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
