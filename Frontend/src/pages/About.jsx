@@ -4,25 +4,22 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
+import GitHubIcon from '@mui/icons-material/GitHub';
 import InstagramIcon from "@mui/icons-material/Instagram";
-import YouTubeIcon from "@mui/icons-material/YouTube";
 import {
-    Button,
     CardActionArea,
     CardActions,
     Paper,
-    Grid,
-    Icon,
-    Stack,
+    IconButton,
 } from "@mui/material";
 import { avatar } from "../../assets/avatar";
+import { Link } from 'react-router-dom';
 
 const About = () => {
     return (
         <Paper
             sx={{
                 display: "flex",
-
                 p: 2,
                 m: 8,
                 alignItems: "center",
@@ -42,16 +39,16 @@ const About = () => {
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
-                            Hi, I'm Hüseyin
+                            Hello, My name is Mehmet
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            I'm currently learning different full-stack
-                            development languages.
+                            I'm a full-stack developer .
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            I already know python, JavaScript, ReactJS, Next.js
-                            and typescript
+                            I'm use know for frontend technologies JavaScript, ReactJS, Next.js, typescript..
+                            and for backend technologies NodeJS, ExpressJS.. Also know to Mongo DB, SQLite and MYSQL
                         </Typography>
+
                         <Typography variant="body2" color="text.secondary">
                             💬 You can ask me anything you want to know
                         </Typography>
@@ -60,33 +57,33 @@ const About = () => {
                 <CardActions
                     sx={{ display: "flex", justifyContent: "space-between" }}
                 >
-                    <Button
+                    <IconButton
                         sx={{ color: "black", "&:hover": { color: "red" } }}
                         size="small"
-                    >
-                        <LinkedInIcon />
-                    </Button>
-                    <Button
-                        sx={{ color: "black", "&:hover": { color: "red" } }}
-                        size="small"
-                    >
+                        component={Link} to={"https://twitter.com/Mr_Navelin"} target="_blank" rel="noopener noreferrer">
                         <TwitterIcon />
-                    </Button>
-                    <Button
+                    </IconButton>
+                    <IconButton
                         sx={{ color: "black", "&:hover": { color: "red" } }}
                         size="small"
-                    >
+                        component={Link} to={"https://github.com/MTanrivermis"} target="_blank" rel="noopener noreferrer">
+                        <GitHubIcon />
+                    </IconButton>
+                    <IconButton
+                        sx={{ color: "black", "&:hover": { color: "red" } }}
+                        size="small"
+                        component={Link} to={"https://www.linkedin.com/in/mtanrivermis/"} target="_blank" rel="noopener noreferrer">
+                        <LinkedInIcon />
+                    </IconButton>
+                    <IconButton
+                        sx={{ color: "black", "&:hover": { color: "red" } }}
+                        size="small"
+                        component={Link} to={"https://www.instagram.com/mr.phixiuss/"} target="_blank" rel="noopener noreferrer">
                         <InstagramIcon />
-                    </Button>
-                    <Button
-                        sx={{ color: "black", "&:hover": { color: "red" } }}
-                        size="small"
-                    >
-                        <YouTubeIcon />
-                    </Button>
+                    </IconButton>
                 </CardActions>
             </Card>
-        </Paper>
+        </Paper >
     );
 };
 

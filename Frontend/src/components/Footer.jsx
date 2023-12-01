@@ -139,7 +139,7 @@ const Footer = () => {
                     }}
                 >
                     {/*//? Copyright © KP {new Date().getFullYear()}  güncel tarih icin*/}
-                    Copyright &copy; KP 2023
+                    Copyright &copy; MIDNIGHT 2023
                 </Typography>
             </Box>
             <Box
